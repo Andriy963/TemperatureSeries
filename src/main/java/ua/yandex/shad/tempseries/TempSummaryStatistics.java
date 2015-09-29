@@ -2,7 +2,7 @@ package ua.yandex.shad.tempseries;
 
 public class TempSummaryStatistics {
 	
-	public static final double epsilon = 0.000001;
+	public static final double epsilons = 0.000001;
 	
 	private final double avgTemp;
 	private final double devTemp;
@@ -28,16 +28,16 @@ public class TempSummaryStatistics {
 	public boolean equals(Object equal) {
 		
 		TempSummaryStatistics eq = (TempSummaryStatistics) equal;
-		if(Math.abs(this.avgTemp - eq.avgTemp) > epsilon) {
+		if (Math.abs(this.avgTemp - eq.avgTemp) > epsilons) {
 			return false;
 		}
-		if(Math.abs(this.devTemp - eq.devTemp) > epsilon) {
+		if (Math.abs(this.devTemp - eq.devTemp) > epsilons) {
 			return false;
 		}
-		if(Math.abs(this.minTemp - eq.minTemp) > epsilon) {
+		if (Math.abs(this.minTemp - eq.minTemp) > epsilons) {
 			return false;
 		}
-		if(Math.abs(this.maxTemp - eq.maxTemp) > epsilon) {
+		if (Math.abs(this.maxTemp - eq.maxTemp) > epsilons) {
 			return false;
 		}
 		return true;
