@@ -3,9 +3,8 @@ package ua.yandex.shad.tempseries;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
-	
 	public static final double MIN_TEMPERATURE = -273;
-	public static final double epsilon = 0.0000001;
+	public static final double epsilons = 0.0000001;
 
 	private double[] temperatures;
 	private int quantityOfActualTemperatures;
@@ -21,11 +20,11 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double average() {
-		if (temperatures.length == 0) {
+		if(temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		double sumOfTemperatures = 0.0;
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			double val = temperatures[i];
 			sumOfTemperatures += val;
 		}
@@ -35,12 +34,12 @@ public class TemperatureSeriesAnalysis {
     }    
     
     public double deviation() {
-		if(temperatures.length == 0) {
+		if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		double averageOfTemperatures = average();
 		double sumOfSquares = 0;
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			double val = temperatures[i] - averageOfTemperatures;
 			sumOfSquares = sumOfSquares + val*val;
 		}
@@ -51,14 +50,14 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double min() {
-		if(temperatures.length == 0) {
+		if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		
 		double minElement = temperatures[0];
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			double val = temperatures[i];
-			if(val < minElement) {
+			if (val < minElement) {
 				minElement = val;
 			}
 		}
@@ -71,9 +70,9 @@ public class TemperatureSeriesAnalysis {
 		}
 		
 		double maxElement = temperatures[0];
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			double val = temperatures[i];
-			if(val > maxElement) {
+			if (val > maxElement) {
 				maxElement = val;
 			}
 		}
@@ -81,22 +80,22 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double findTempClosestToZero() {
-		if(temperatures.length == 0) {
+		if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		
 		double closestToZeroElement = temperatures[0];
 		double absOfClosestToZeroElement = closestToZeroElement;
-		if(closestToZeroElement < 0) {
+		if (closestToZeroElement < 0) {
 			absOfClosestToZeroElement = -closestToZeroElement;
 		}
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			double val = temperatures[i];
-			if(val >= 0 && val <= absOfClosestToZeroElement) {
+			if (val >= 0 && val <= absOfClosestToZeroElement) {
 				closestToZeroElement = val;
 				absOfClosestToZeroElement = val;
 			}
-			else if(val < 0 && val > -absOfClosestToZeroElement) {
+			else if (val < 0 && val > -absOfClosestToZeroElement) {
 				closestToZeroElement = val;
 				absOfClosestToZeroElement = -val;
 			}
@@ -105,32 +104,37 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double findTempClosestToValue(double tempValue) {
-		if(temperatures.length == 0) {
+		if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		double closestToValueElement = temperatures[0];
 		double absSubOfValueAndClosestElement;
-		if(closestToValueElement >= tempValue) {
-			absSubOfValueAndClosestElement=closestToValueElement-tempValue;
+		if (closestToValueElement >= tempValue) {
+			absSubOfValueAndClosestElement = 
+			closestToValueElement-tempValue;
 		}
-		else{
-			absSubOfValueAndClosestElement=tempValue-closestToValueElement;
+		else {
+			absSubOfValueAndClosestElement = 
+			tempValue-closestToValueElement;
 		}
 		
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			double val = temperatures[i];
-			if(val >= tempValue && 
-			(val - tempValue) < (absSubOfValueAndClosestElement - epsilon)) {
+			if (val >= tempValue 
+			&& (val - tempValue) < 
+			(absSubOfValueAndClosestElement - epsilons)) {
 				closestToValueElement = val;
 				absSubOfValueAndClosestElement = val - tempValue;
 			}
-			else if(val < tempValue && 
-			(tempValue - val) < (absSubOfValueAndClosestElement - epsilon)) {
+			else if (val < tempValue 
+			&& (tempValue - val) < 
+			(absSubOfValueAndClosestElement - epsilons)) {
 				closestToValueElement = val;
 				absSubOfValueAndClosestElement = tempValue - val;
 			}
-			else if(val >= tempValue && 
-			(val - tempValue - absSubOfValueAndClosestElement) < epsilon){
+			else if (val >= tempValue 
+			&& (val - tempValue - absSubOfValueAndClosestElement) 
+			< epsilons){
 				closestToValueElement = val;
 			}
 		}
@@ -139,15 +143,15 @@ public class TemperatureSeriesAnalysis {
 }
     
     public double[] findTempsLessThen(double tempValue) {
-		if(temperatures.length == 0) {
+		if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		int[] pointerOnGoodValues = 
 		new int[quantityOfActualTemperatures];
 		int quantityOfGoodValues = 0;
 		
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
-			if(temperatures[i] < tempValue) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
+			if (temperatures[i] < tempValue) {
 				pointerOnGoodValues[i] = 1;
 				quantityOfGoodValues++;
 			}
@@ -155,8 +159,8 @@ public class TemperatureSeriesAnalysis {
 		double[] valuesLessThenTempValue = 
 		new double[quantityOfGoodValues];
 		int count = 0;
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
-			if(pointerOnGoodValues[i] == 1) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
+			if (pointerOnGoodValues[i] == 1) {
 				valuesLessThenTempValue[count]=temperatures[i];
 				count++;
 			}
@@ -166,14 +170,14 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double[] findTempsGreaterThen(double tempValue) {
-        if(temperatures.length == 0) {
+        if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		int[] pointerOnGoodValues = 
 		new int[quantityOfActualTemperatures];
 		int quantityOfGoodValues = 0;
 		
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			if(temperatures[i] >= tempValue) {
 				pointerOnGoodValues[i] = 1;
 				quantityOfGoodValues++;
@@ -182,9 +186,10 @@ public class TemperatureSeriesAnalysis {
 		double[] valuesGreaterThenTempValue = 
 		new double[quantityOfGoodValues];
 		int count = 0;
-		for(int i=0;i<quantityOfActualTemperatures;i++) {
-			if(pointerOnGoodValues[i] == 1) {
-				valuesGreaterThenTempValue[count]=temperatures[i];
+		for (int i = 0; i < quantityOfActualTemperatures; i++) {
+			if (pointerOnGoodValues[i] == 1) {
+				valuesGreaterThenTempValue[count] = 
+				temperatures[i];
 				count++;
 			}
 		}
@@ -192,7 +197,7 @@ public class TemperatureSeriesAnalysis {
     }
     
     public TempSummaryStatistics summaryStatistics() {
-        if(temperatures.length == 0) {
+        if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		double avgTemp = average();
@@ -207,36 +212,37 @@ public class TemperatureSeriesAnalysis {
     }
     
     public int addTemps(double ... temps) {
-		if(temps.length == 0) {
+		if (temps.length == 0) {
 			throw new IllegalArgumentException();
 		}
-		for(double val : temps) {
+		for (double val : temps) {
 			if(val < MIN_TEMPERATURE) {
 				throw new InputMismatchException();
 			}
 		}
 		int freeSize=temperatures.length-quantityOfActualTemperatures;
-		if(freeSize >= temps.length) {
+		if (freeSize >= temps.length) {
 			int iter = quantityOfActualTemperatures + 1;
-			for(double val : temps) {
+			for (double val : temps) {
 				temperatures[iter] = val;
 				iter++;
 			}
 		}
-		else{
+		else {
 			int newLengthOfArray = temperatures.length*2;
-			int sumLength = quantityOfActualTemperatures + temps.length;
-			while(newLengthOfArray < sumLength) {
+			int sumLength = 
+			quantityOfActualTemperatures + temps.length;
+			while (newLengthOfArray < sumLength) {
 				newLengthOfArray = newLengthOfArray*2;
 			}
 			double[] newTemperatureArray = 
 			new double[newLengthOfArray];
 			int iter = 0;
-			for(double val : temperatures) {
+			for (double val : temperatures) {
 				newTemperatureArray[iter] = val;
 				iter++;
 			}
-			for(double val : temps) {
+			for (double val : temps) {
 				newTemperatureArray[iter] = val;
 				iter++;
 			}
