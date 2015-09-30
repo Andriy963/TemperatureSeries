@@ -20,7 +20,7 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double average() {
-		if(temperatures.length == 0) {
+		if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		double sumOfTemperatures = 0.0;
@@ -65,7 +65,7 @@ public class TemperatureSeriesAnalysis {
     }
      
     public double max() {
-        if(temperatures.length == 0) {
+        if (temperatures.length == 0) {
 			throw new IllegalArgumentException();
 		}
 		
@@ -121,20 +121,22 @@ public class TemperatureSeriesAnalysis {
 		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			double val = temperatures[i];
 			if (val >= tempValue 
-			&& (val - tempValue) < 
-			(absSubOfValueAndClosestElement - epsilons)) {
+			&& (val - tempValue) 
+			< (absSubOfValueAndClosestElement - epsilons)) {
 				closestToValueElement = val;
-				absSubOfValueAndClosestElement = val - tempValue;
+				absSubOfValueAndClosestElement 
+				= val - tempValue;
 			}
 			else if (val < tempValue 
-			&& (tempValue - val) < 
-			(absSubOfValueAndClosestElement - epsilons)) {
+			&& (tempValue - val) 
+			< (absSubOfValueAndClosestElement - epsilons)) {
 				closestToValueElement = val;
-				absSubOfValueAndClosestElement = tempValue - val;
+				absSubOfValueAndClosestElement 
+				= tempValue - val;
 			}
 			else if (val >= tempValue 
 			&& (val - tempValue - absSubOfValueAndClosestElement) 
-			< epsilons){
+			< epsilons) {
 				closestToValueElement = val;
 			}
 		}
@@ -161,7 +163,7 @@ public class TemperatureSeriesAnalysis {
 		int count = 0;
 		for (int i = 0; i < quantityOfActualTemperatures; i++) {
 			if (pointerOnGoodValues[i] == 1) {
-				valuesLessThenTempValue[count]=temperatures[i];
+				valuesLessThenTempValue[count] = temperatures[i];
 				count++;
 			}
 		}
@@ -178,7 +180,7 @@ public class TemperatureSeriesAnalysis {
 		int quantityOfGoodValues = 0;
 		
 		for (int i = 0; i < quantityOfActualTemperatures; i++) {
-			if(temperatures[i] >= tempValue) {
+			if (temperatures[i] >= tempValue) {
 				pointerOnGoodValues[i] = 1;
 				quantityOfGoodValues++;
 			}
@@ -216,11 +218,11 @@ public class TemperatureSeriesAnalysis {
 			throw new IllegalArgumentException();
 		}
 		for (double val : temps) {
-			if(val < MIN_TEMPERATURE) {
+			if (val < MIN_TEMPERATURE) {
 				throw new InputMismatchException();
 			}
 		}
-		int freeSize=temperatures.length-quantityOfActualTemperatures;
+		int freeSize = temperatures.length-quantityOfActualTemperatures;
 		if (freeSize >= temps.length) {
 			int iter = quantityOfActualTemperatures + 1;
 			for (double val : temps) {
