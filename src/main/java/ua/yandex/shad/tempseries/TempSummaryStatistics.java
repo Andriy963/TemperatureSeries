@@ -1,9 +1,7 @@
 package ua.yandex.shad.tempseries;
 
 public class TempSummaryStatistics {
-	
-	public static final double epsilons = 0.000001;
-	
+	public static final double epsilon = 0.0000001;
 	private final double avgTemp;
 	private final double devTemp;
 	private final double minTemp;
@@ -28,16 +26,16 @@ public class TempSummaryStatistics {
 	public boolean equals(Object equal) {
 		
 		TempSummaryStatistics eq = (TempSummaryStatistics) equal;
-		if (Math.abs(this.avgTemp - eq.avgTemp) > epsilons) {
+		if (Math.abs(this.avgTemp - eq.avgTemp) > epsilon) {
 			return false;
 		}
-		if (Math.abs(this.devTemp - eq.devTemp) > epsilons) {
+		if (Math.abs(this.devTemp - eq.devTemp) > epsilon) {
 			return false;
 		}
-		if (Math.abs(this.minTemp - eq.minTemp) > epsilons) {
+		if (Math.abs(this.minTemp - eq.minTemp) > epsilon) {
 			return false;
 		}
-		if (Math.abs(this.maxTemp - eq.maxTemp) > epsilons) {
+		if (Math.abs(this.maxTemp - eq.maxTemp) > epsilon) {
 			return false;
 		}
 		return true;
