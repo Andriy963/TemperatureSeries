@@ -24,7 +24,7 @@ public class TempSummaryStatistics {
      
      @Override
      public boolean equals(Object equal) {
-          if(equal == null || this == null){
+          if (equal == null || this == null) {
 			  return false;
 		  }
           TempSummaryStatistics eq = (TempSummaryStatistics) equal;
