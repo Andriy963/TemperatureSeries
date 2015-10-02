@@ -25,7 +25,7 @@ public class TempSummaryStatistics {
      @Override
      public boolean equals(Object equal) {
           if (equal == null || this == null) {
-			  return false;
+                  		  return false;
 		  }
           TempSummaryStatistics eq = (TempSummaryStatistics) equal;
           if (Math.abs(this.avgTemp - eq.avgTemp) > EPSILON) {
@@ -48,4 +48,3 @@ public class TempSummaryStatistics {
           return 42;
   }
 }
-
