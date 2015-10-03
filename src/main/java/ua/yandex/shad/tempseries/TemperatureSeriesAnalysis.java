@@ -172,24 +172,24 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double[] findTempsGreaterThen(double tempValue) {
-        if (temperatures.length == 0) {
+      if (temperatures.length == 0) {
          throw new IllegalArgumentException();
       }
-      int[] pointerOnGoodValues = 
+      int[] pointersOnGoodValues = 
       new int[quantityOfActualTemperatures];
-      int quantityOfGoodValues = 0;
+      int quantitiesOfGoodValues = 0;
       
       for (int i = 0; i < quantityOfActualTemperatures; i++) {
          if (temperatures[i] >= tempValue) {
-            pointerOnGoodValues[i] = 1;
-            quantityOfGoodValues++;
+            pointersOnGoodValues[i] = 1;
+            quantitiesOfGoodValues++;
          }
       }
       double[] valuesGreaterThenTempValue = 
-      new double[quantityOfGoodValues];
+      new double[quantitiesOfGoodValues];
       int count = 0;
       for (int i = 0; i < quantityOfActualTemperatures; i++) {
-         if (pointerOnGoodValues[i] == 1) {
+         if (pointersOnGoodValues[i] == 1) {
             valuesGreaterThenTempValue[count] = 
             temperatures[i];
             count++;
