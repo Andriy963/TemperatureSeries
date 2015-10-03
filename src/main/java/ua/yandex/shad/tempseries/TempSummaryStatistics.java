@@ -24,9 +24,6 @@ public class TempSummaryStatistics {
      
      @Override
      public boolean equals(Object equal) {
-         if (this.getClass() != equal.getClass()) {
-             return false;
-         }
           if (equal == null) {
               return false;
           }
