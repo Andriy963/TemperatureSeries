@@ -16,7 +16,9 @@ public class TemperatureSeriesAnalysis {
     
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
       quantityOfActualTemperatures = temperatureSeries.length;
-      temperatures = temperatureSeries;
+	  temperatures = new double[temperatureSeries.length];
+	  System.arraycopy(temperatureSeries, 0, temperatures, 0,
+	  temperatureSeries.length);
     }
     
     public double average() {
