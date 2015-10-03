@@ -27,6 +27,9 @@ public class TempSummaryStatistics {
           if (equal == null) {
               return false;
           }
+          if (this.getClass() != equal.getClass()) {
+             return false;
+         }
           TempSummaryStatistics eq = (TempSummaryStatistics) equal;
           if (Math.abs(this.avgTemp - eq.avgTemp) > EPSILON) {
                return false;
